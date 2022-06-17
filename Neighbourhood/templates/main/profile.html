@@ -1,0 +1,74 @@
+        {%extends 'main/base.html' %}  {% block content %} {% load static %}
+         <div class="container">
+             <div class="col-lg-12 mb-4 mb-sm-5">
+                 <div class="card card-style1 border-0">
+                     <div class="card-body p-1-9 p-sm-2-3 p-md-6 p-lg-7">
+                         <div class="row align-items-center">
+
+                             <div class="col-lg-6 mb-4 mb-lg-0">
+                                 <img style="height: 250px; width: 250px; margin-left: 5rem; border-radius: 50%;"
+                                     src="https://cdn.pixabay.com/photo/2021/08/22/06/24/bird-6564285_960_720.jpg"
+                                     alt="imgt">
+                             </div>
+                             <div class="col-lg-6 px-xl-10">
+                                 <div class=" d-lg-inline-block py-1-9 px-1-9 px-sm-6 mb-1-9 rounded"
+                                     style="padding: 2rem; background: #344341; margin-bottom: 1rem; min-width: 20rem;">
+                                     <h3 class="h2 text-white mb-0">{{user.username}}</h3>
+                                     <button type="button" class="btn btn-outline-light btn-sm mt-2"
+                                         data-toggle="modal" data-target="#exampleModal">Edit Profile</button>
+                                 </div>
+
+
+
+                                     <!-- Modal -->
+                                     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                                         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                         <div class="modal-dialog modal-dialog-centered" role="document">
+                                             <div class="modal-content">
+                                                 <div class="modal-header">
+                                                     <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                                                     <button type="button" class="close" data-dismiss="modal"
+                                                         aria-label="Close">
+                                                         <span aria-hidden="true">&times;</span>
+                                                     </button>
+                                                 </div>
+                                                 <div class="modal-body">
+                                                     ...
+                                                 </div>
+                                                 <div class="modal-footer">
+                                                     <button type="button" class="btn btn-secondary"
+                                                         data-dismiss="modal">Close</button>
+                                                     <button type="button" class="btn btn-primary">Save changes</button>
+                                                 </div>
+                                             </div>
+                                         </div>
+                                     </div>
+
+
+
+
+
+
+
+
+                                 <ul class="list-unstyled mb-1-9">
+                                     <li class="mb-2 mb-xl-3 display-28"><span
+                                             class="display-26 text-secondary me-2 font-weight-600">Bio:</span>{{user.profile.bio}}
+                                     </li>
+                                     <li class="mb-2 mb-xl-3 display-28"><span
+                                             class="display-26 text-secondary me-2 font-weight-600">Email:</span>
+                                         {{user.email}}</li>
+                                     <li class="mb-2 mb-xl-3 display-28"><span
+                                             class="display-26 text-secondary me-2 font-weight-600">Total
+                                             Projects:</span>{{user.profile.project.count}}
+                                     </li>
+
+                                 </ul>
+
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+         </div>
+         {% endblock %}
