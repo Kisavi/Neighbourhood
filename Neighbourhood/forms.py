@@ -50,17 +50,16 @@ class LoginForm(AuthenticationForm):
                                widget=forms.TextInput(attrs={'placeholder': 'Username',
                                                              'class': 'form-control'}))
 
-    password2 = forms.CharField(max_length=50,
-                                required=True,
-                                widget=forms.PasswordInput(attrs={'placeholder': 'Confirm Password',
-                                                                  'class': 'form-control',
-                                                                  'data-toggle': 'password',
-                                                                  'id': 'password',
-                                                                  'name': 'password'}))
+    password = forms.CharField(max_length=50,
+                               required=True,
+                               widget=forms.PasswordInput(attrs={'placeholder': 'Password',
+                                                                 'class': 'form-control',
+                                                                 'data-toggle': 'password',
+                                                                 'id': 'password',
+                                                                 'name': 'password'}))
 
     remember_me = forms.BooleanField(required=False)
 
     class Meta:
         model = User
         fields = ['username', 'password', 'remember_me']
-

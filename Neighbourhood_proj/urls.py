@@ -24,6 +24,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('Neighbourhood.urls')),
     path('', include('django.contrib.auth.urls')),
-    path('login', CustomLoginView.as_view(authentication_form=LoginForm), name='login')
+    path('login', CustomLoginView.as_view(authentication_form=LoginForm), name='login'),
+
 
 ]
