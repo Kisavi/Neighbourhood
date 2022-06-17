@@ -9,6 +9,6 @@ urlpatterns = [
     path('home', views.home, name='home'),
     path('view-post', views.view_post, name='view-post'),
     path('profile', views.profile, name='profile'),
-    path('signup', RegisterView.as_view(), name='signup')
+    path('signup', SignupView.as_view(), name='signup')
 
 ]

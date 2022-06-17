@@ -5,7 +5,7 @@ from .forms import RegisterForm
 
 
 # Create your views here.
-class RegisterView(View):
+class SignupView(View):
     form_class = RegisterForm
     initial = {'key': 'value'}
     template_name = 'registration/signup.html'
@@ -23,7 +23,7 @@ class RegisterView(View):
             username = form.cleaned_data.get('username')
             messages.success(request, f'{username}, your account has been created successfully')
 
-            return redirect(to='/login')
+            return redirect(to='/')
 
         return render(request, self.template_name, {'form': form})
 
