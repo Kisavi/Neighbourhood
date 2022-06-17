@@ -154,3 +154,5 @@ cloudinary.config(
     api_secret=config('API_SECRET')
 
 )
+
+SESSION_COOKIE_AGE = 60 * 60 * 24 * 30
