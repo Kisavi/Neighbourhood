@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.views import View
-from .forms import SignupForm
+from .forms import SignupForm, LoginForm
+from django.contrib.auth.views import LoginView
 
 
 # Create your views here.
@@ -26,6 +27,22 @@ class SignupView(View):
             return redirect(to='/')
 
         return render(request, self.template_name, {'form': form})
+
+
+class CustomLoginView(LoginView):
+    form_class = LoginForm
+
+    def form_valid(self, form):
+        remember_me = form.cleaned_data.get('remember_me')
+
+        if not remember_me:
+            # set session expiry to 0 seconds. So it will automatically close the session after the browser is closed.
+            self.request.session.set_expiry(0)
+
+            # set sessions as modified to force cookies to be saved as defined.
+            self.request.session.modified = True
+        # else session will last as long as we define it in settings.py.
+        return super(CustomLoginView, self).form_valid(form)
 
 
 def index(request):
