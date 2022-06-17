@@ -1,7 +1,33 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.contrib import messages
+from django.views import View
+from .forms import RegisterForm
 
 
 # Create your views here.
+class RegisterView(View):
+    form_class = RegisterForm
+    initial = {'key': 'value'}
+    template_name = 'registration/signup.html'
+
+    def get(self, request):
+        form = self.form_class(initial=self.initial)
+        return render(request, self.template_name, {'form': form})
+
+    def post(self, request):
+        form = self.form_class(request.POST)
+
+        if form.is_valid():
+            form.save()
+
+            username = form.cleaned_data.get('username')
+            messages.success(request, f'{username}, your account has been created successfully')
+
+            return redirect(to='/login')
+
+        return render(request, self.template_name, {'form': form})
+
+
 def index(request):
     return render(request, 'main/index.html')
 
