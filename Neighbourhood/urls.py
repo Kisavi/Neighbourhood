@@ -10,5 +10,6 @@ urlpatterns = [
     path('view-post', views.view_post, name='view-post'),
     path('profile', views.profile, name='profile'),
     path('signup', SignupView.as_view(), name='signup')
+    path('login')
 
 ]

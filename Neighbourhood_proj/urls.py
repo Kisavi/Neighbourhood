@@ -16,9 +16,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+from django.contrib.auth import views as auth_views
+from Neighbourhood.views import CustomLoginView
+from Neighbourhood.forms import LoginForm
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('Neighbourhood.urls')),
     path('', include('django.contrib.auth.urls')),
+    path('login', CustomLoginView.as_view(authentication_form=LoginForm), name='login')
 
 ]
