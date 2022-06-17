@@ -13,7 +13,7 @@
                              <div class="col-lg-6 px-xl-10">
                                  <div class=" d-lg-inline-block py-1-9 px-1-9 px-sm-6 mb-1-9 rounded"
                                      style="padding: 2rem; background: #344341; margin-bottom: 1rem; min-width: 20rem;">
-                                     <h3 class="h2 text-white mb-0">{{user.username}}</h3>
+                                     <h3 class="h2 text-white mb-0">{{}}</h3>
                                      <button type="button" class="btn btn-outline-light btn-sm mt-2"
                                          data-toggle="modal" data-target="#exampleModal">Edit Profile</button>
                                  </div>
@@ -53,14 +53,14 @@
 
                                  <ul class="list-unstyled mb-1-9">
                                      <li class="mb-2 mb-xl-3 display-28"><span
-                                             class="display-26 text-secondary me-2 font-weight-600">Bio:</span>{{user.profile.bio}}
+                                             class="display-26 text-secondary me-2 font-weight-600">Bio:</span>{}}
                                      </li>
                                      <li class="mb-2 mb-xl-3 display-28"><span
                                              class="display-26 text-secondary me-2 font-weight-600">Email:</span>
-                                         {{user.email}}</li>
+                                         {{}}</li>
                                      <li class="mb-2 mb-xl-3 display-28"><span
                                              class="display-26 text-secondary me-2 font-weight-600">Total
-                                             Projects:</span>{{user.profile.project.count}}
+                                             Projects:</span>{{}}
                                      </li>
 
                                  </ul>
