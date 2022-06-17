@@ -1,12 +1,12 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.views import View
-from .forms import RegisterForm
+from .forms import SignupForm
 
 
 # Create your views here.
 class SignupView(View):
-    form_class = RegisterForm
+    form_class = SignupForm
     initial = {'key': 'value'}
     template_name = 'registration/signup.html'
 
