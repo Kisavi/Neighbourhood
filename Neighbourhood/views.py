@@ -67,6 +67,10 @@ def profile(request):
     else:
         user_form = UpdateUserForm(instance=request.user)
         profile_form = UpdateProfileForm(instance=request.user.profile)
+    # context = {
+    #         'user_form': user_form,
+    #         'profile_form': profile_form
+    # }
 
     return render(request, 'main/profile.html', {'user_form': user_form, 'profile_form': profile_form})
 

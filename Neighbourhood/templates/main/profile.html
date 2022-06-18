@@ -8,7 +8,7 @@
 
                         <div class="col-lg-6 mb-4 mb-lg-0">
                             <img style="height: 250px; width: 250px; margin-left: 5rem; border-radius: 50%;"
-                                 src="https://cdn.pixabay.com/photo/2021/08/22/06/24/bird-6564285_960_720.jpg"
+                                 src="{{ user.profile.photo.url }}"
                                  alt="imgt">
                         </div>
                         <div class="col-lg-6 px-xl-10">
@@ -27,7 +27,7 @@
                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                                            <h5 class="modal-title" id="exampleModalLongTitle">Edit Profile</h5>
                                             <button type="button" class="close" data-dismiss="modal"
                                                     aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
@@ -62,10 +62,10 @@
                                                                 <a href="#">Change Password</a>
                                                                 <hr>
                                                                 <label class="small mb-1">Change Avatar:</label>
-                                                                {{ profile_form.avatar }}
+                                                                {{ profile_form.photo }}
                                                             </div>
-                                                            <label class="small mb-1">Bio:</label> {{ profile_form.bio
-                                                            }}
+                                                            <label class="small mb-1">Bio:</label>
+                                                            {{ profile_form.bio }}
                                                         </div>
                                                     </div>
                                                     <br><br>
@@ -83,14 +83,20 @@
 
                             <ul class="list-unstyled mb-1-9">
                                 <li class="mb-2 mb-xl-3 display-28"><span
-                                        class="display-26 text-secondary me-2 font-weight-600">Bio:</span>{}}
+                                        class="display-26 text-secondary me-2 font-weight-600">Username:</span>
+                                    {{user.username}}
+                                </li>
+                                <li class="mb-2 mb-xl-3 display-28"><span
+                                        class="display-26 text-secondary me-2 font-weight-600">Bio:</span>
+                                    {{user.profile.bio}}
                                 </li>
                                 <li class="mb-2 mb-xl-3 display-28"><span
                                         class="display-26 text-secondary me-2 font-weight-600">Email:</span>
+                                    {{user.email}}
                                 </li>
                                 <li class="mb-2 mb-xl-3 display-28"><span
                                         class="display-26 text-secondary me-2 font-weight-600">Total
-                                             Projects:</span>
+                                             Posts:</span>
                                 </li>
 
                             </ul>
