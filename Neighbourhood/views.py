@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.views import View
-from .forms import SignupForm, LoginForm, UpdateUserForm, UpdateProfileForm
+from .forms import SignupForm, LoginForm, UpdateUserForm, UpdateProfileForm, ProfileForm
 from django.contrib.auth.views import LoginView
 
 
@@ -51,6 +51,11 @@ def index(request):
 
 def home(request):
     return render(request, 'main/home.html')
+
+
+def hoodProfile(request):
+    hood_form = ProfileForm
+    return render(request, 'main/hoodform.html', {'hood_form': hood_form})
 
 
 def profile(request):
