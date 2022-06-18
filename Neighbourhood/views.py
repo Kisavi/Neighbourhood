@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.views import View
-from .forms import SignupForm, LoginForm
+from .forms import SignupForm, LoginForm, UpdateUserForm, UpdateProfileForm
 from django.contrib.auth.views import LoginView
 
 
@@ -54,7 +54,21 @@ def home(request):
 
 
 def profile(request):
-    return render(request, 'main/profile.html')
+    if request.method == 'POST':
+        user_form = UpdateUserForm(request.POST, instance=request.user)
+        profile_form = UpdateProfileForm(request.POST, request.FILES, instance=request.user.profile)
+
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+            messages.success(request, 'You have successfully updated your profile')
+            return redirect(to='profile')
+
+    else:
+        user_form = UpdateUserForm(instance=request.user)
+        profile_form = UpdateProfileForm(instance=request.user.profile)
+
+    return render(request, 'main/profile.html', {'user_form': user_form, 'profile_form': profile_form})
 
 
 def view_post(request):
