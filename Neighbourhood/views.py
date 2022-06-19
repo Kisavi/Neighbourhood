@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.views import View
-from .forms import SignupForm, LoginForm, UpdateUserForm, UpdateProfileForm, ProfileForm
+from .forms import SignupForm, LoginForm, UpdateUserForm, UpdateProfileForm, ProfileForm, PostForm
 from django.contrib.auth.views import LoginView
 from .models import Post
 
@@ -51,8 +51,19 @@ def index(request):
 
 
 def home(request):
+    current_user = request.user
     posts = Post.objects.all()
-    return render(request, 'main/home.html', {'posts': posts})
+    if request.method == 'POST':
+        post_form = PostForm(request.POST)
+        if post_form.is_valid():
+            post = post_form.save(commit=False)
+            post.poster = current_user
+            post.save()
+        return redirect('home')
+    else:
+        post_form = PostForm()
+
+    return render(request, 'main/home.html', {'posts': posts, 'post_form': post_form})
 
 
 def hoodProfile(request):
