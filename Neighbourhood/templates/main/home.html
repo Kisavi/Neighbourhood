@@ -24,29 +24,36 @@
                     </div>
                     <!-- Button trigger modal -->
                     <button type="button" class="btn btn-outline-success btn-sm mt-4" data-toggle="modal"
-                            data-target="#exampleModalCenter">Post Alert
+                            data-target="#exampleModalCenteralert">Post Alert
                     </button>
 
 
                     <!-- Modal -->
-                    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+                    <div class="modal fade" id="exampleModalCenteralert" tabindex="-1" role="dialog"
                          aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                                    <h5 class="modal-title" id="exampleModalLongTitle">Post Alert</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    ...
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary"
-                                            data-dismiss="modal">Close
-                                    </button>
-                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                    <form method="POST">
+                                        {% csrf_token %}
+                                        {% bootstrap_form alert_form %}
+                                        <div class="form-row">
+                                            <div class="col-md-10 offset-md-1">
+                                                <div class="form-group mt-0 mb-1">
+                                                    <button name="login"
+                                                            class="col-md-12 btn btn-dark"
+                                                            id="login">Post Alert
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -237,29 +244,36 @@
                     </div>
                     <!-- Button trigger modal -->
                     <button type="button" class="btn btn-outline-success btn-sm mt-4" data-toggle="modal"
-                            data-target="#exampleModalCenter">Post Business
+                            data-target="#exampleModalCenterbusiness">Post Business
                     </button>
 
 
                     <!-- Modal -->
-                    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+                    <div class="modal fade" id="exampleModalCenterbusiness" tabindex="-1" role="dialog"
                          aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                                    <h5 class="modal-title" id="exampleModalLongTitle">Post a business</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    ...
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary"
-                                            data-dismiss="modal">Close
-                                    </button>
-                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                     <form method="POST">
+                                        {% csrf_token %}
+                                        {% bootstrap_form business_form %}
+                                        <div class="form-row">
+                                            <div class="col-md-10 offset-md-1">
+                                                <div class="form-group mt-0 mb-1">
+                                                    <button name="login"
+                                                            class="col-md-12 btn btn-dark"
+                                                            id="login">Post Business
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
