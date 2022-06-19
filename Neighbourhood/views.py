@@ -3,6 +3,7 @@ from django.contrib import messages
 from django.views import View
 from .forms import SignupForm, LoginForm, UpdateUserForm, UpdateProfileForm, ProfileForm
 from django.contrib.auth.views import LoginView
+from .models import Post
 
 
 # Create your views here.
@@ -50,7 +51,8 @@ def index(request):
 
 
 def home(request):
-    return render(request, 'main/home.html')
+    posts = Post.objects.all()
+    return render(request, 'main/home.html', {'posts': posts})
 
 
 def hoodProfile(request):
