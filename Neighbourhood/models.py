@@ -8,6 +8,11 @@ HOODS = (
     ('Kasarani', 'Kasarani')
 )
 
+PRIORITIES = (
+    ('High Priority', 'High Priority'),
+    ('Low Priority', 'Low Priority')
+)
+
 
 # Create your models here.
 class Profile(models.Model):
@@ -40,3 +45,23 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.comment
+
+
+class Business(models.Model):
+    poster = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    name = models.TextField(max_length=100)
+    contact = models.IntegerField(max_length=10)
+    location = models.CharField(max_length=100)
+    description = models.TextField(max_length=300)
+
+    def __str__(self):
+        return self.name
+
+
+class Alert(models.Model):
+    poster = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    message = models.CharField(max_length=100)
+    priority = models.CharField(choices=PRIORITIES, max_length=50)
+
+    def __str__(self):
+        return self.user.username
