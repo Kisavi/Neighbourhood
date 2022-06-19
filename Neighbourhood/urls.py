@@ -12,7 +12,9 @@ urlpatterns = [
     path('update-profile', views.update_profile, name='profile'),
     path('signup', SignupView.as_view(), name='signup'),
     url(r'^oauth/', include('social_django.urls', namespace='social')),
-    path('hood-profile', views.hoodProfile, name='hood-profile')
+    path('hood-profile', views.hoodProfile, name='hood-profile'),
+    path('comment/<id>', views.comment, name='comment'),
+    # path('comment', views.comment, name='comment'),
 
 
 ]
