@@ -54,11 +54,20 @@ def home(request):
 
 
 def hoodProfile(request):
-    hood_form = ProfileForm
+    current_user = request.user
+    if request.method == 'POST':
+        hood_form = ProfileForm(request.POST, request.FILES, instance=request.user.profile)
+        if hood_form.is_valid():
+            profile = hood_form.save(commit=False)
+            profile.user = current_user
+            profile.save()
+            return redirect('home')
+    else:
+        hood_form = ProfileForm(instance=request.user.profile)
     return render(request, 'main/hoodform.html', {'hood_form': hood_form})
 
 
-def profile(request):
+def update_profile(request):
     if request.method == 'POST':
         user_form = UpdateUserForm(request.POST, instance=request.user)
         profile_form = UpdateProfileForm(request.POST, request.FILES, instance=request.user.profile)
@@ -66,7 +75,7 @@ def profile(request):
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
             profile_form.save()
-            messages.success(request, 'You have successfully updated your profile')
+            # messages.success(request, 'You have successfully updated your profile')
             return redirect(to='profile')
 
     else:

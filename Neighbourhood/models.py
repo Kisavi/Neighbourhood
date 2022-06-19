@@ -18,4 +18,22 @@ class Profile(models.Model):
     hood = models.CharField(choices=HOODS, max_length=25, default=1)
 
     def __str__(self):
-        return self.user.username
+        return self.bio
+
+
+class Post(models.Model):
+    poster = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    description = models.TextField(max_length=700)
+    pub_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.description
+
+
+class Comment(models.Model):
+    commentor = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, null=True)
+    comment = models.TextField(max_length=300)
+
+    def __str__(self):
+        return self.comment
