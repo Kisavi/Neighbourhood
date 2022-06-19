@@ -22,7 +22,7 @@ class Profile(models.Model):
 
 
 class Post(models.Model):
-    poster = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    poster = models.ForeignKey(User, on_delete=models.CASCADE, null=True, related_name='posts')
     description = models.TextField(max_length=700)
     pub_date = models.DateTimeField(auto_now_add=True)
 
@@ -34,8 +34,8 @@ class Post(models.Model):
 
 
 class Comment(models.Model):
-    commentor = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
-    post = models.ForeignKey(Post, on_delete=models.CASCADE, null=True)
+    commentor = models.ForeignKey(User, on_delete=models.CASCADE, null=True, related_name='comment')
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, null=True, related_name='comment')
     comment = models.TextField(max_length=300)
 
     def __str__(self):
