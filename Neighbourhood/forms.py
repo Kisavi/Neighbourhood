@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from .models import Profile, Post, Comment
+from .models import Profile, Post, Comment, Business, Alert
 
 
 class SignupForm(UserCreationForm):
@@ -108,3 +108,15 @@ class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
         fields = ('comment',)
+
+
+class BusinessForm(forms.ModelForm):
+    class Meta:
+        model = Business
+        fields = ['name', 'contact', 'location', 'description']
+
+
+class AlertForm(forms.ModelForm):
+    class Meta:
+        model = Alert
+        fields = ['priority', 'message']
