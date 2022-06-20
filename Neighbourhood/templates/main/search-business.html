@@ -1,0 +1,46 @@
+{%extends 'main/base.html' %}  {% block content %} {% load static %}
+<section id="business" class="testimonials section-bg" style="margin-bottom: 11rem; margin-top: 7rem;">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="section-title" data-aos="fade-right">
+                        <h2>Business</h2>
+                        {% if object_list %}
+                        <p>Found {{object_list|length}} business {{ object_list|pluralize }} with that name.</p>
+                        {%else%}
+                        <p>Found 0 businesses with that name.</p>
+                        {%endif%}
+                    </div>
+                    <!-- Button trigger modal -->
+                    <a href="{% url 'home' %}">
+                    <button type="button" class="btn btn-outline-success btn-sm mt-4" data-toggle="modal"
+                            data-target="#exampleModalCenterbusiness">Back
+                    </button>
+                    </a>
+                </div>
+                <div class="col-lg-8" data-aos="fade-up" data-aos-delay="100">
+                    <div class="" data-aos="fade-up" data-aos-delay="100">
+                        <div class="swiper-wrapper">
+
+                            {%for business in object_list%}
+                            <div class="swiper-slide">
+                                <div class="testimonial-item">
+                                    Business name: <h5>{{ business.name }}</h5><hr>
+                                     Contact: <p>{{ business.contact }}</p>
+                                     Location: <p>{{ business.location }}</p>
+                                   Description: <p>{{ business.description }}</p>
+                                    Posted by: <p>{{ business.poster }} on <span class="text-muted">{{business.pub_date}}</span></p>
+                                </div>
+                            </div><!-- End testimonial item -->
+                            {%endfor%}
+
+                        </div>
+                        <div class="swiper-pagination"></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section><!-- End Testimonials Section -->
+{% endblock %}
