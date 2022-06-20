@@ -1,10 +1,12 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.views import View
-from .forms import SignupForm, LoginForm, UpdateUserForm, UpdateProfileForm, ProfileForm, PostForm, CommentForm
+from .forms import SignupForm, LoginForm, UpdateUserForm, UpdateProfileForm, ProfileForm, PostForm, CommentForm, \
+    BusinessForm, AlertForm
 from django.contrib.auth.views import LoginView
-from .models import Post
+from .models import Post, Business, Alert
 from django.http import HttpResponseRedirect
+from django.urls import reverse
 
 
 # Create your views here.
@@ -51,20 +53,60 @@ def index(request):
     return render(request, 'main/index.html')
 
 
+# def home(request):
+#     current_user = request.user
+#     posts = Post.objects.all()
+#     business_form = BusinessForm()
+#     alert_form = AlertForm()
+#     if request.method == 'POST':
+#         post_form = PostForm(request.POST)
+#         if post_form.is_valid():
+#             post = post_form.save(commit=False)
+#             post.poster = current_user
+#             post.save()
+#         return redirect('home')
+#     else:
+#         post_form = PostForm()
+#
+#     return render(request, 'main/home.html',
+#                   {'posts': posts, 'post_form': post_form, 'business_form': business_form, 'alert_form': alert_form})
+
+
 def home(request):
     current_user = request.user
     posts = Post.objects.all()
+    businesses = Business.objects.all()
+    alerts = Alert.objects.all()
     if request.method == 'POST':
-        post_form = PostForm(request.POST)
-        if post_form.is_valid():
-            post = post_form.save(commit=False)
-            post.poster = current_user
-            post.save()
-        return redirect('home')
+        if request.POST.get("form_type") == 'formOne':
+            alert_form = AlertForm(request.POST)
+            if alert_form.is_valid():
+                alert = alert_form.save(commit=False)
+                alert.poster = current_user
+                alert.save()
+            return redirect('home')
+        elif request.POST.get("form_type") == 'formTwo':
+            post_form = PostForm(request.POST)
+            if post_form.is_valid():
+                post = post_form.save(commit=False)
+                post.poster = current_user
+                post.save()
+            return redirect(reverse('home') + '#formThree')
+        else:
+            business_form = BusinessForm(request.POST)
+            if business_form.is_valid():
+                business = business_form.save(commit=False)
+                business.poster = request.user
+                business.save()
+            return redirect('home')
     else:
+        alert_form = AlertForm()
         post_form = PostForm()
+        business_form = BusinessForm()
 
-    return render(request, 'main/home.html', {'posts': posts, 'post_form': post_form})
+    return render(request, 'main/home.html',
+                  {'posts': posts, 'alerts': alerts, 'businesses': businesses, 'post_form': post_form,
+                   'business_form': business_form, 'alert_form': alert_form})
 
 
 def hoodProfile(request):
@@ -101,6 +143,25 @@ def comment(request, id):
             'comment_form': comment_form,
         }
     return render(request, 'main/comment.html', context)
+
+
+# def post_business(request):
+#     if request.method == 'POST':
+#         business_form = BusinessForm(request.POST)
+#         if business_form.is_valid():
+#             business = business_form.save(commit=False)
+#             business.poster = request.user
+#             business.save()
+#         return redirect('home')
+#     else:
+#         business_form = BusinessForm()
+#     return render(request, 'main/home.html', {'business_form': business_form})
+#
+#
+# def post_alert(request):
+#     alert_form = AlertForm()
+#     return render(request, 'main/home.html', {'alert_form': alert_form})
+
 
 #
 # def comment(request):
