@@ -14,7 +14,6 @@ urlpatterns = [
     url(r'^oauth/', include('social_django.urls', namespace='social')),
     path('hood-profile', views.hoodProfile, name='hood-profile'),
     path('comment/<id>', views.comment, name='comment'),
-    # path('comment', views.comment, name='comment'),
 
 
 ]
