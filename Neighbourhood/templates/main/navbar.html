@@ -10,8 +10,8 @@
 
 
                 <nav id="navbar" class="navbar">
-                     <form class="form-inline">
-                         <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                     <form class="form-inline" action="{% url 'search_business' %}" method="get">
+                         <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q">
 
                      </form>
                     <ul>
