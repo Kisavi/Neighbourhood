@@ -42,6 +42,7 @@ class Comment(models.Model):
     commentor = models.ForeignKey(User, on_delete=models.CASCADE, null=True, related_name='comment')
     post = models.ForeignKey(Post, on_delete=models.CASCADE, null=True, related_name='comment')
     comment = models.TextField(max_length=300)
+    pub_date = models.DateTimeField(auto_now_add=True, blank=True)
 
     def __str__(self):
         return self.comment
@@ -49,10 +50,11 @@ class Comment(models.Model):
 
 class Business(models.Model):
     poster = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
-    name = models.TextField(max_length=100)
-    contact = models.IntegerField(max_length=10)
+    name = models.CharField(max_length=100)
+    contact = models.CharField(max_length=10)
     location = models.CharField(max_length=100)
-    description = models.TextField(max_length=300)
+    description = models.TextField(max_length=130)
+    pub_date = models.DateTimeField(auto_now_add=True, blank=True)
 
     def __str__(self):
         return self.name
@@ -60,8 +62,9 @@ class Business(models.Model):
 
 class Alert(models.Model):
     poster = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
-    message = models.CharField(max_length=100)
-    priority = models.CharField(choices=PRIORITIES, max_length=50)
+    message = models.TextField(max_length=100)
+    priority = models.CharField(choices=PRIORITIES, max_length=50, default=1)
+    pub_date = models.DateTimeField(auto_now_add=True, blank=True)
 
     def __str__(self):
-        return self.user.username
+        return self.message
