@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.views import View
+from django.views.generic import ListView
 from .forms import SignupForm, LoginForm, UpdateUserForm, UpdateProfileForm, ProfileForm, PostForm, CommentForm, \
     BusinessForm, AlertForm
 from django.contrib.auth.views import LoginView
@@ -51,25 +52,6 @@ class CustomLoginView(LoginView):
 
 def index(request):
     return render(request, 'main/index.html')
-
-
-# def home(request):
-#     current_user = request.user
-#     posts = Post.objects.all()
-#     business_form = BusinessForm()
-#     alert_form = AlertForm()
-#     if request.method == 'POST':
-#         post_form = PostForm(request.POST)
-#         if post_form.is_valid():
-#             post = post_form.save(commit=False)
-#             post.poster = current_user
-#             post.save()
-#         return redirect('home')
-#     else:
-#         post_form = PostForm()
-#
-#     return render(request, 'main/home.html',
-#                   {'posts': posts, 'post_form': post_form, 'business_form': business_form, 'alert_form': alert_form})
 
 
 def home(request):
@@ -145,30 +127,6 @@ def comment(request, id):
     return render(request, 'main/comment.html', context)
 
 
-# def post_business(request):
-#     if request.method == 'POST':
-#         business_form = BusinessForm(request.POST)
-#         if business_form.is_valid():
-#             business = business_form.save(commit=False)
-#             business.poster = request.user
-#             business.save()
-#         return redirect('home')
-#     else:
-#         business_form = BusinessForm()
-#     return render(request, 'main/home.html', {'business_form': business_form})
-#
-#
-# def post_alert(request):
-#     alert_form = AlertForm()
-#     return render(request, 'main/home.html', {'alert_form': alert_form})
-
-
-#
-# def comment(request):
-#     comment_form = CommentForm()
-#     return render(request, 'main/view_post.html', {'comment_form': comment_form})
-
-
 def update_profile(request):
     posts = request.user.posts.all()
     if request.method == 'POST':
@@ -184,13 +142,15 @@ def update_profile(request):
     else:
         user_form = UpdateUserForm(instance=request.user)
         profile_form = UpdateProfileForm(instance=request.user.profile)
-    # context = {
-    #         'user_form': user_form,
-    #         'profile_form': profile_form
-    # }
 
     return render(request, 'main/profile.html', {'user_form': user_form, 'profile_form': profile_form, 'posts': posts})
 
 
-def view_post(request):
-    return render(request, 'main/view_post.html')
+class SearchBusinessView(ListView):
+    model = Business
+    template_name = 'main/search-business.html'
+
+    def get_queryset(self):
+        query = self.request.GET.get("q")
+        object_list = Business.objects.filter(name__icontains=query)
+        return object_list
