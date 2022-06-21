@@ -1,11 +1,33 @@
-{%extends 'main/base.html' %}  {% block content %} {% load static %} {% load bootstrap4 %}
+{%extends 'main/base.html' %}  {% block content %} {% load static %} {% load bootstrap4 %} {% load ratings %}
 <!-- ======= Hero Section ======= -->
 <section id="hero" class="d-flex align-items-center">
     <div class="container text-center position-relative" data-aos="fade-in" data-aos-delay="200">
-        <h1>Your New Online Presence with Bethany</h1>
-        <h2>We are team of talented designers making websites with Bootstrap</h2>
-        <a href="#about" class="btn-get-started scrollto">Get Started</a>
+        <h1>Welcome to {{user.profile.hood}} NeighbourHood {{user.username}}</h1>
+        <h2>We are pleased to have you as our new member. We hope you will enjoy living here.</h2>
+        <a href="#about" class="btn-get-started scrollto" data-toggle="modal" data-target="#exampleModalem">Emergency
+            Contacts</a>
     </div>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalem" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Incase of an emergency</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h6><strong>Police Contacts: </strong>0722989696</h6><br>
+                    <h6><strong>Local Ambulance: </strong>0100345686</h6><br>
+                    <h6><strong>County Fire Department: </strong>0100578347</h6>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
 </section><!-- End Hero -->
 
 <main id="main">
@@ -18,7 +40,8 @@
                 <div class="col-lg-4">
                     <div class="section-title" data-aos="fade-right">
                         <h2>Alerts</h2>
-                        <p>Here are the alerts that other neighbourhood members made.Be sure to check them just to be upto date with what is happening in the neighbourhood.</p>
+                        <p>Here are the alerts that other neighbourhood members made.Be sure to check them just to be
+                            upto date with what is happening in the neighbourhood.</p>
 
                     </div>
                     <!-- Button trigger modal -->
@@ -72,17 +95,17 @@
                                     <hr>
                                     <p>
                                         <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                                       {{ alert.message }}
+                                        {{ alert.message }}
                                         <i class="bx bxs-quote-alt-right quote-icon-right"></i>
                                     </p>
-                                    <img src="{{user.profile.photo.url}}" class="testimonial-img"
+                                    <img style="height: 5.5rem;" src="{{alert.poster.profile.photo.url}}" class="testimonial-img"
                                          alt="">
                                     <h3>{{ alert.poster }}</h3>
                                     <h4>{{ alert.pub_date }}</h4>
                                 </div>
 
                             </div><!-- End testimonial item -->
-                             {% endfor %}
+                            {% endfor %}
 
                         </div>
                         <div class="swiper-pagination"></div>
@@ -147,7 +170,7 @@
                         {% for post in posts %}
                         <div class="col-lg-6">
                             <div class="member" data-aos="zoom-in" data-aos-delay="100">
-                                <div class="pic"><img src="{{ user.profile.photo.url }}" class="img-fluid" alt="">
+                                <div class="pic"><img style="height: 5rem;" src="{{ post.poster.profile.photo.url }}" class="img-fluid testimonial-img" alt="">
                                 </div>
                                 <div class="member-info">
                                     <h4>{{ post.poster.username }}</h4>
@@ -180,7 +203,8 @@
                 <div class="col-lg-4">
                     <div class="section-title" data-aos="fade-right">
                         <h2>Business</h2>
-                        <p>Here are some of the business that you can find in this neighbourhood together with their contacts. .</p>
+                        <p>Here are some of the business that you can find in this neighbourhood together with their
+                            contacts. .</p>
                     </div>
                     <!-- Button trigger modal -->
                     <button type="button" class="btn btn-outline-success btn-sm mt-4" data-toggle="modal"
@@ -200,9 +224,9 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                     <form method="POST" id="formThree">
+                                    <form method="POST" id="formThree">
                                         {% csrf_token %}
-                                         <input type="hidden" name="form_type" value="formThree">
+                                        <input type="hidden" name="form_type" value="formThree">
                                         {% bootstrap_form business_form %}
                                         <div class="form-row">
                                             <div class="col-md-10 offset-md-1">
@@ -230,11 +254,14 @@
                             {%for business in businesses%}
                             <div class="swiper-slide">
                                 <div class="testimonial-item">
-                                    Business name: <h5>{{ business.name }}</h5><hr>
-                                     Contact: <p>{{ business.contact }}</p>
-                                     Location: <p>{{ business.location }}</p>
-                                   Description: <p>{{ business.description }}</p>
-                                    Posted by: <p>{{ business.poster }} on <span class="text-muted">{{business.pub_date}}</span></p>
+                                    Business name: <h5>{{ business.name }}</h5>
+                                    <hr>
+                                    Contact: <p>{{ business.contact }}</p>
+                                    Location: <p>{{ business.location }}</p>
+                                    Description: <p>{{ business.description }}</p>
+                                    Posted by: <p>{{ business.poster }} on <span class="text-muted">{{business.pub_date}}</span>
+                                </p><hr>
+                                    {% ratings business %}
 
                                 </div>
                             </div><!-- End testimonial item -->
