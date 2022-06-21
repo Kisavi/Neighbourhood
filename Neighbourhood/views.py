@@ -1,11 +1,12 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.views import View
+from django.core.exceptions import ObjectDoesNotExist
 from django.views.generic import ListView
 from .forms import SignupForm, LoginForm, UpdateUserForm, UpdateProfileForm, ProfileForm, PostForm, CommentForm, \
     BusinessForm, AlertForm
 from django.contrib.auth.views import LoginView
-from .models import Post, Business, Alert
+from .models import Post, Business, Alert, Profile
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 
@@ -54,6 +55,13 @@ def index(request):
     return render(request, 'main/index.html')
 
 
+def welcome(request):
+    if request.user.profile.hood == "1":
+        return redirect('hood-profile')
+    else:
+        return redirect('home')
+
+
 def home(request):
     current_user = request.user
     posts = Post.objects.all()
@@ -91,6 +99,48 @@ def home(request):
                    'business_form': business_form, 'alert_form': alert_form})
 
 
+# def alert(request):
+#     current_user = request.user
+#     if request.method == 'POST':
+#         alert_form = AlertForm(request.POST)
+#         if alert_form.is_valid():
+#             alert = alert_form.save(commit=False)
+#             alert.poster = current_user
+#             alert.save()
+#         return redirect('home')
+#     else:
+#         alert_form = AlertForm()
+#     return render(request, 'main/home.html', {'alert_form': alert_form})
+#
+#
+# def post(request):
+#     current_user = request.user
+#     if request.method == 'POST':
+#         post_form = PostForm(request.POST)
+#         if post_form.is_valid():
+#             post = post_form.save(commit=False)
+#             post.poster = current_user
+#             post.save()
+#         return redirect(reverse('home') + '#formThree')
+#     else:
+#         post_form = PostForm()
+#     return render(request, 'main/home.html', {'post_form': post_form})
+#
+#
+# def business(request):
+#     current_user = request.user
+#     if request.method == 'POST':
+#         business_form = BusinessForm(request.POST)
+#         if business_form.is_valid():
+#             business = business_form.save(commit=False)
+#             business.poster = request.user
+#             business.save()
+#         return redirect('home')
+#     else:
+#         business_form = BusinessForm()
+#     return render(request, 'main/home.html', {'business_form': business_form})
+
+
 def hoodProfile(request):
     current_user = request.user
     if request.method == 'POST':
@@ -107,6 +157,7 @@ def hoodProfile(request):
 
 def comment(request, id):
     current_user = request.user
+    print(current_user.profile.hood)
     post = get_object_or_404(Post, pk=id)
     comments = post.comment.all()
     if request.method == 'POST':
