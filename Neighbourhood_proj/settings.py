@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'cloudinary',
     'rest_framework',
     'social_django',
+    'star_ratings',
 ]
 
 MIDDLEWARE = [
@@ -154,7 +155,7 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-LOGIN_REDIRECT_URL = 'hood-profile'
+LOGIN_REDIRECT_URL = 'welcome'
 LOGIN_URL = 'login'
 LOGOUT_REDIRECT_URL = 'index'
 
@@ -175,3 +176,5 @@ SOCIAL_AUTH_GITHUB_SECRET = config('SOCIAL_AUTH_GITHUB_SECRET')
 # social auth configs for google
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = config('SOCIAL_AUTH_GOOGLE_OAUTH2_KEY')
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = config('SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET')
+
+STAR_RATINGS_RERATE = False
