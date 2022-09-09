@@ -103,12 +103,16 @@ h1, h2, h3, h4, h5, h6 {
 /*--------------------------------------------------------------
 # Registration
 --------------------------------------------------------------*/
-.card {
-   margin-top: 7rem;
+/*.card {
+   margin-top:2rem;
+   border: 1px solid red;
+   color: pink;
 }
 
 .signup-form {
-   margin-top: 11rem;
+   margin-top: 2rem;
+   border: 1px solid green;
+   background: red;
 }
 
 @media (max-width: 768px) {
@@ -116,7 +120,7 @@ h1, h2, h3, h4, h5, h6 {
       margin-top: 0rem;
       margin-bottom: 0rem;
    }
-}
+}*/
 
 /*--------------------------------------------------------------
 # Disable AOS delay on mobile
