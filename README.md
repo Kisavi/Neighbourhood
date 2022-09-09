@@ -94,11 +94,20 @@ Denis Kisavi
 
 - Create .env file and paste the following filing where appropriate:
   ```python
-  SECRET_KEY = '<Secret_key>'
-  DBNAME = '<your db name>'
-  USER = '<Username>'
-  PASSWORD = '<password>'
+  SECRET_KEY = 'your secret'
+  DB_NAME = 'your db name'
+  DB_USER = 'username'
+  DB_PASSWORD = 'password'
+  DB_HOST='127.0.0.1'
   DEBUG = True
+  MODE = 'dev'
+  CLOUD_NAME = 'something'
+  API_KEY = 'something'
+  API_SECRET = 'asecret'
+  SOCIAL_AUTH_GITHUB_KEY = 'something'
+  SOCIAL_AUTH_GITHUB_SECRET = 'something'
+  SOCIAL_AUTH_GOOGLE_OAUTH2_KEY='something'
+  SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET='something'
   ```
 
 - Run initial migration
